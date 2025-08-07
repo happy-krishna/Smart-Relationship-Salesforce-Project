@@ -1,0 +1,49 @@
+<template>
+    <lightning-card title="Smart Relationship Explorer">
+        <div class="slds-form-element slds-card slds-p-around_medium">
+            <lightning-input label="Select an Object" value={searhValue} placeholder="Enter here..." type="search" onchange={handleInput}>
+            </lightning-input>
+        <template if:true={showDropdown}>
+            <div class="slds-dropdown slds-dropdown_fluid slds-m-top_x-small slds-p-around_none">
+                <ul class="slds-listbox slds-listbox_vertical" role="listbox">
+                    <template for:each={filteredRecords} for:item="rec">
+                        <li
+                            key={rec}
+                            class="slds-listbox__item"
+                            data-id={rec}
+                            onclick={handleSelect}
+                            role="option"
+                            tabindex="0"
+                        >
+                        <div class="slds-media slds-listbox__option slds-listbox__option_plain">
+                            <span class="slds-media__body">  <strong>{rec}</strong></span>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </template>
+       <div class="slds-align_absolute-center slds-m-top_medium">
+            <lightning-button 
+                label="Submit" 
+                variant="brand" 
+                onclick={handleSave}
+                class="slds-m-right_small">
+            </lightning-button> <br>
+            <lightning-button 
+                label="Clear" 
+                variant="brand" 
+                onclick={clearSave}>
+            </lightning-button>
+        </div>
+        </div>
+        <template if:true={showtable}>
+                <lightning-datatable
+                    key-field="fieldName"
+                    data={tableData}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+    </lightning-card>
+</template>
